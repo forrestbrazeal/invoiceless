@@ -2,16 +2,17 @@
 
 Invoiceless is a serverless API for sending simple recurring invoices by email using AWS Lambda, API Gateway, CloudWatch Events, and SES.
 
-## Deploy
+## Deployment Instructions
 
+0. Make sure you have the AWS CLI installed
 1. Clone the repository
 2. From the top level directory, run
 
-`sam package --template-file template.yaml --s3-bucket [you s3 bucket] --output-template-file packaged.yaml`
+`aws cloudformation package --template-file template.yaml --s3-bucket [your s3 bucket] --output-template-file packaged.yaml`
 
-`sam deploy --template-file ./packaged.yaml --stack-name invoiceless --capabilities CAPABILITY_IAM`
+`aws cloudformation deploy --template-file ./packaged.yaml --stack-name invoiceless --capabilities CAPABILITY_IAM`
 
-## API
+## Using the API
 
 ### POST /invoice
 Sends an invoice immediately to the recipients specified in `agreement_info.client_emails`.
@@ -36,7 +37,7 @@ body = {
       "
     ],
     "provider_email": "me@mybusiness.com",
-    "verified_sender_arn": "arn:aws:ses:us-east-1:094776257060:identity/forrestbrazeal@gmail.com"
+    "verified_sender_arn": "arn:aws:ses:us-east-1:[account]:identity/me@mybusiness.com"
   },
   "client_info": {
     "client_id": "1001",
