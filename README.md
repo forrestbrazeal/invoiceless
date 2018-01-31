@@ -102,7 +102,7 @@ Removes the CloudWatch Events rule for the specified client ID. Note that Invoic
 
 Invoiceless uses PyInvoice to generate simple invoices that will be sent via email to the destination addresses you specify.
 
-[Invoice](Example email.png)
+![Invoice](Example email.png)
 
 
 
