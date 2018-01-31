@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless Invoicing Application
+Resources:
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchEventsFullAccess
+        - arn:aws:iam::aws:policy/AmazonSESFullAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - events.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaInlinePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - iam:PassRole
+                Resource: "*"
+  SendInvoiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: invoiceless/
+      Handler: api_handlers.api_handler
+      Runtime: python3.6
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        PostInvoiceResource:
+          Type: Api
+          Properties:
+            Path: /invoices
+            Method: post
+      Environment:
+        Variables:
+          LOG_LEVEL: DEBUG
+  ScheduleRecurringInvoiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: invoiceless/
+      Handler: api_handlers.api_handler
+      Runtime: python3.6
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        PostRecurringInvoiceResource:
+          Type: Api
+          Properties:
+            Path: /invoices/scheduled
+            Method: post
+      Environment:
+        Variables:
+          LOG_LEVEL: DEBUG
+          SEND_FUNCTION_ARN: !GetAtt SendInvoiceFunction.Arn
+          EVENT_ROLE: !GetAtt LambdaRole.Arn
+  UnscheduleRecurringInvoiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: invoiceless/
+      Handler: api_handlers.api_handler
+      Runtime: python3.6
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        DeleteRecurringInvoiceResource:
+          Type: Api
+          Properties:
+            Path: /invoices/scheduled/{client_id}
+            Method: delete
+      Environment:
+        Variables:
+          LOG_LEVEL: DEBUG
