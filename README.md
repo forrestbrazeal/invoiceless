@@ -98,6 +98,12 @@ The example above will send a recurring invoice on the 25th day of every month a
 
 Removes the CloudWatch Events rule for the specified client ID. Note that Invoiceless only supports one recurring invoice per client at the moment.
 
+## Generated Invoices
+
+Invoiceless uses PyInvoice to generate simple invoices that will be sent via email to the destination addresses you specify.
+
+[Invoice](Example email.png)
+
 
 
 
