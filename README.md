@@ -14,7 +14,7 @@ Invoiceless is a serverless API for sending simple recurring invoices by email u
 
 ## Using the API
 
-### POST /invoice
+### POST /invoices
 Sends an invoice immediately to the recipients specified in `agreement_info.client_emails`.
 
 #### Notes
@@ -102,7 +102,7 @@ Removes the CloudWatch Events rule for the specified client ID. Note that Invoic
 
 Invoiceless uses PyInvoice to generate simple invoices that will be sent via email to the destination addresses you specify.
 
-![Invoice](Example email.png)
+![Example Invoice](Example email.png?raw=true)
 
 
 
