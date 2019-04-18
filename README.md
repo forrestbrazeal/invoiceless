@@ -4,7 +4,7 @@ Invoiceless is a serverless API for sending simple recurring invoices by email u
 
 ## Quick Deploy
 
-[<img src="./img/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=us-east-1/stacks/new?stackName=invoiceless&templateURL=https://s3.amazonaws.com/rboyd-sarbucket/packaged.yaml) 
+[<img src="./img/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=invoiceless&templateURL=https://s3.amazonaws.com/rboyd-sarbucket/packaged.yaml) 
 
 
 
