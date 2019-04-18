@@ -2,6 +2,12 @@
 
 Invoiceless is a serverless API for sending simple recurring invoices by email using AWS Lambda, API Gateway, CloudWatch Events, and SES.
 
+## Quick Deploy
+
+[<img src="./img/cloudformation-launch-stack.png">](https://console.aws.amazon.com/cloudformation/home?region=us-east-1/stacks/new?stackName=invoiceless&templateURL=https://s3.amazonaws.com/rboyd-sarbucket/packaged.yaml) 
+
+
+
 ## Deployment Instructions
 
 0. Make sure you have the AWS CLI installed
@@ -103,8 +109,3 @@ Removes the CloudWatch Events rule for the specified client ID. Note that Invoic
 Invoiceless uses PyInvoice to generate simple invoices that will be sent via email to the destination addresses you specify.
 
 ![Example Invoice](example_email.png?raw=true)
-
-
-
-
-
